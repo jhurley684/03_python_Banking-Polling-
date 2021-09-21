@@ -1,7 +1,9 @@
+#import dependencies
 import os
 import csv
 import numpy as np
 
+#Set filepath
 budget_data_csv = os.path.join(  "Resources", "budget_data.csv")
 
 # Open and read csv
@@ -16,6 +18,7 @@ with open(budget_data_csv) as csv_file:
 
 # write data to lists
 #=========================================
+
 #initialize list variables to empty sets
     profits_losses = []
     months=[]
@@ -26,45 +29,39 @@ with open(budget_data_csv) as csv_file:
         profits_losses.append(row[1])
         months.append(row[0])
 
-#Print each list and total amount of months        
-    # print(profits_losses)
-    # print(months)
-    # print(f'Total Months: {len(profits_losses)}')
-
 
   
  #Convert elements in profits_losses to int, and make it a list 
     profits_losses = list(map(int, profits_losses))
     
+
 # Sum the profits_losses list to a total  
     Sum_PL = sum(profits_losses)
-    # print(f'Total Profit: {Sum_PL}')
+   
 
+# Create a combined file for months & profits
     combined = zip(months,profits_losses)
-    # print(f'Heres a dictionary of combined {dict(combined)}')
-    # print(f'Here is a list of combined {list(combined)}')
-    
-
+  
  
-
  # Make a list of all the absolute differences between elements
     change = np.diff(profits_losses)
-    # print(change)
-    # print(len(change))
+  
+  #Add up all the changes then divide by number of changes to get average
     Avg_change = (sum(change)/len(change))
-    # print(f'Average Changes: {Avg_change}')  #****Use for summary at end
+
 
  #Calculate Greatest increase in profits - including dates
     greatest_profits = change.max()
-    greatest_losses = change.min()
-    # print(f'Greatest increase in profites: {greatest_profits}')
-    # print(f'Greatest decrease in profits: {greatest_losses}')
 
+ #Calculate Greatest decrease in profits - including dates 
+    greatest_losses = change.min()
+ 
 
 # Find the date key that goes with the greatest increase & decrease
     combined_d = dict(combined) #this makes the combined list a dictionary
     max_gain = max(combined_d, key=combined_d.get)
     min_gain = min(combined_d, key=combined_d.get)
+
 
 
 # Print to terminal the Financial Analysis
@@ -73,12 +70,12 @@ with open(budget_data_csv) as csv_file:
     print('Financial Analysis')
     print('-----------------------------------------')
     print(f'Total Months: {len(profits_losses)}')
-    print(f'Total Profit: {Sum_PL}')
-    print(f'Average Changes: {Avg_change}')
-    print(f'Greatest Increase in Profits: {max_gain}   {greatest_profits}')
-    print(f'Greatest Decrease in Profits: {min_gain}   {greatest_losses}')
+    print(f'Total Profit: ${Sum_PL}')
+    print(f'Average Changes: ${format(Avg_change, ".2f")}')
+    print(f'Greatest Increase in Profits: {max_gain}   ${greatest_profits}')
+    print(f'Greatest Decrease in Profits: {min_gain}   ${greatest_losses}')
     print(' ' )
-    print(' ' )
+  
     
 
 # print to terminal and to a csv file
@@ -86,6 +83,6 @@ with open("PyBank.txt", "a") as f:
     print('-----------------------------------------',file = f)
     print(f'Total Months: {len(profits_losses)}',file = f)
     print(f'Total Profit: {Sum_PL}',file = f)
-    print(f'Average Changes: {Avg_change}',file = f)
-    print(f'Greatest Increase in Profits: {max_gain}   {greatest_profits}',file = f)
-    print(f'Greatest Decrease in Profits: {min_gain}   {greatest_losses}',file = f) 
+    print(f'Average Changes: ${format(Avg_change, ".2f")}',file = f)
+    print(f'Greatest Increase in Profits: {max_gain}   ${greatest_profits}',file = f)
+    print(f'Greatest Decrease in Profits: {min_gain}   ${greatest_losses}',file = f) 
