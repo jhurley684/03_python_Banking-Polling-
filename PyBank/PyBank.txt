@@ -1,6 +1,16 @@
 -----------------------------------------
+<<<<<<< HEAD
 Total Months: 86
 Total Profit: 38382578
 Average Changes: $-2315.12
 Greatest Increase in Profits: Feb-2012   $1926159
 Greatest Decrease in Profits: Sep-2013   $-2196167
+=======
+-----------------------------------------
+Total Months: 86
+Total Profit: 38382578
+Average Changes: -2315.1176470588234
+Greatest Increase in Profits: Feb-2012   1926159
+Greatest Decrease in Profits: Sep-2013   -2196167
+
+>>>>>>> fe0770e8210319fccca65ec807ca77abd14f57ba
